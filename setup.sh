@@ -6,6 +6,12 @@ DOTDIR=${HOME}/dot
 
 function exported-config() {
     echo screenrc
+    echo emacs.d
+}
+
+function echoeval() {
+    echo EXECUTING: $*
+    $*
 }
 
 function setup-config() {
@@ -14,9 +20,9 @@ function setup-config() {
     local from=$DOTDIR/$config
     local to=${HOME}/.${config} # add a dot
 
-    [ ! -f "$to" ] || return
+    [ ! -e "$to" ] || return
     
-    ln -s "$from" "$to"
+    echoeval ln -s "$from" "$to"
 }
 
 # create link to $HOME
